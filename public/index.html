@@ -14,14 +14,22 @@
 
 <body class="bg-light">
 
+<<<<<<< HEAD
   <nav class="navbar navbar-expand-lg bg-white shadow-sm navbar-light">
+=======
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+>>>>>>> b0e6007e99807ca78d5374ee85526d155b6a2d9b
     <div class="container">
       <a class="navbar-brand" href="index.html">
         <span>TechTribo - Tecnologia</span>
       </a>
 
       <div>
+<<<<<<< HEAD
         <a href="login.html" class="btn btn-outline-primary" id="btnLogin">Login</a>
+=======
+        <a href="login.html" class="btn btn-outline-primary">Login</a>
+>>>>>>> b0e6007e99807ca78d5374ee85526d155b6a2d9b
       </div>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -138,12 +146,18 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/scripts/app.js"></script>
+<<<<<<< HEAD
+=======
+  <script src="assets/scripts/login.js"></script>
+
+>>>>>>> b0e6007e99807ca78d5374ee85526d155b6a2d9b
 
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
 
       const user = JSON.parse(localStorage.getItem("usuarioLogado"));
+<<<<<<< HEAD
 
       const btnLogin = document.querySelector("#btnLogin");
       const btnCadastrar = document.getElementById("btnCadastrar");
@@ -153,12 +167,20 @@
       // ==============================
       // 1. LOGIN / LOGOUT
       // ==============================
+=======
+      const btnLogin = document.querySelector('a[href="login.html"]');
+      const menuCadDev = document.querySelector('a[href="cadastro_desenvolvedores.html"]');
+      const btnCadastrar = document.getElementById("btnCadastrar");
+
+      // ----------- LOGIN / LOGOUT ------------
+>>>>>>> b0e6007e99807ca78d5374ee85526d155b6a2d9b
       if (btnLogin) {
         if (user) {
           btnLogin.textContent = "Logout";
           btnLogin.classList.remove("btn-outline-primary");
           btnLogin.classList.add("btn-danger");
           btnLogin.href = "#";
+<<<<<<< HEAD
 
           btnLogin.onclick = (e) => {
             e.preventDefault(); // bloqueia o comportamento padrão do <a>
@@ -166,6 +188,12 @@
             window.location.href = "login.html"; // vai direto para a página de login
           };
 
+=======
+          btnLogin.onclick = () => {
+            localStorage.removeItem("usuarioLogado");
+            window.location.reload();
+          };
+>>>>>>> b0e6007e99807ca78d5374ee85526d155b6a2d9b
         } else {
           btnLogin.textContent = "Login";
           btnLogin.classList.add("btn-outline-primary");
@@ -173,6 +201,7 @@
         }
       }
 
+<<<<<<< HEAD
       // ==============================
       // 2. MOSTRAR NOME DO USUÁRIO
       // ==============================
@@ -209,6 +238,16 @@
         // Se não tiver logado → esconde tudo que é privado
         btnCadastrar.style.display = "none";
         menuCadDev.style.display = "none";
+=======
+      // ----------- MENU ADMIN / DEV ------------
+      if (user) {
+        if (user.admin) {
+          menuCadDev.style.display = "inline-block";
+        } else {
+          menuCadDev.style.display = "none";
+          btnCadastrar.style.display = "inline-block";
+        }
+>>>>>>> b0e6007e99807ca78d5374ee85526d155b6a2d9b
       }
 
     });
