@@ -145,14 +145,21 @@
             </button>
 
             <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
                     <li class="nav-item"><a class="nav-link text-white" href="index.html">Início</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="apresentacao.html">Apresentação</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="favoritos.html">Favoritos ⭐</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="cadastro_desenvolvedores.html">Cadastrar
                             Desenvolvedor</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="informacoes.html">Sobre o Site</a></li>
+
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a href="login.html" class="btn btn-outline-light" id="btnLogin">Login</a>
+                    </li>
+
                 </ul>
+
             </div>
 
         </div>
@@ -372,15 +379,34 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const user = JSON.parse(localStorage.getItem("usuarioLogado"));
+            const btnLogin = document.getElementById("btnLogin");
             const itemCadastrarDev = document.querySelector('a[href="cadastro_desenvolvedores.html"]');
 
-            if (!user) return;
+            if (!btnLogin) return;
 
-            if (!user.admin) {
-                if (itemCadastrarDev) itemCadastrarDev.style.display = "none";
+            if (user) {
+                btnLogin.textContent = "Logout";
+                btnLogin.classList.remove("btn-outline-light");
+                btnLogin.classList.add("btn-danger");
+                btnLogin.href = "#";
+
+                btnLogin.onclick = () => {
+                    localStorage.removeItem("usuarioLogado");
+                    window.location.reload();
+                };
+
+                // Oculta botão de cadastrar dev se usuário não for admin
+                if (!user.admin && itemCadastrarDev) {
+                    itemCadastrarDev.style.display = "none";
+                }
+
+            } else {
+                btnLogin.textContent = "Login";
+                btnLogin.href = "login.html";
             }
         });
     </script>
+
 
 
     <!-- Bootstrap JS -->

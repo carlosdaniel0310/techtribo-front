@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (id) {
     // Página de detalhes
-    fetch(`https://projetos-puc.onrender.com/desenvolvedores/${id}`)
+
+    const API = "https://techtribo-backend.onrender.com";
+
+    fetch(`${API}/desenvolvedores`)
       .then(res => res.json())
       .then(dev => {
         document.getElementById("detalhe-info-geral").innerHTML = `
@@ -37,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
 
     // Página index
-    fetch("https://projetos-puc.onrender.com/desenvolvedores")
+    fetch(`${API}/desenvolvedores/${id}`)
       .then(res => res.json())
       .then(devs => {
         const lista = document.getElementById("lista-desenvolvedores");
@@ -59,30 +62,29 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function toggleFavorito(dev) {
-  const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-  if (!usuario) {
-    alert("Você precisa estar logado para favoritar!");
-    return;
-  }
+    if (!usuario) {
+        alert("Você precisa estar logado para favoritar um desenvolvedor!");
+        return;
+    }
 
-  const chaveFavoritos = `favoritos_${usuario.id}`;
+    const chaveFavoritos = `favoritos_${usuario.id}`;
+    let favoritos = JSON.parse(localStorage.getItem(chaveFavoritos)) || [];
 
-  let favoritos = JSON.parse(localStorage.getItem(chaveFavoritos)) || [];
+    const jaExiste = favoritos.some(f => f.id === dev.id);
 
-  // Verifica se já está favoritado
-  const jaExiste = favoritos.find(f => f.id === dev.id);
+    if (jaExiste) {
+        favoritos = favoritos.filter(f => f.id !== dev.id);
+    } else {
+        favoritos.push(dev);
+    }
 
-  if (jaExiste) {
-    favoritos = favoritos.filter(f => f.id !== dev.id); 
-  } else {
-    favoritos.push(dev); 
-  }
+    localStorage.setItem(chaveFavoritos, JSON.stringify(favoritos));
 
-  localStorage.setItem(chaveFavoritos, JSON.stringify(favoritos));
-
-  carregarDevs();
+    carregarDevs();
 }
+
 
 
 function isFavorito(id) {

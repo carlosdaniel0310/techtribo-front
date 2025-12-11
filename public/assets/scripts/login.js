@@ -1,4 +1,7 @@
 async function fazerLogin() {
+
+    const API = "https://techtribo-backend.onrender.com";
+
     const login = document.getElementById("login").value.trim();
     const senha = document.getElementById("senha").value.trim();
     const tipoEscolhido = document.getElementById("tipoLogin").value;
@@ -10,7 +13,7 @@ async function fazerLogin() {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/usuarios?login=${login}&senha=${senha}`);
+        const response = await fetch(`${API}/usuarios?login=${login}&senha=${senha}`);
         const dados = await response.json();
 
         if (dados.length === 0) {
