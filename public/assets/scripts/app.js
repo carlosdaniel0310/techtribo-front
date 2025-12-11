@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function toggleFavorito(dev) {
-<<<<<<< HEAD
     const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
     if (!usuario) {
@@ -88,34 +87,6 @@ function toggleFavorito(dev) {
 
 
 
-=======
-  const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
-
-  if (!usuario) {
-    alert("Você precisa estar logado para favoritar!");
-    return;
-  }
-
-  const chaveFavoritos = `favoritos_${usuario.id}`;
-
-  let favoritos = JSON.parse(localStorage.getItem(chaveFavoritos)) || [];
-
-  // Verifica se já está favoritado
-  const jaExiste = favoritos.find(f => f.id === dev.id);
-
-  if (jaExiste) {
-    favoritos = favoritos.filter(f => f.id !== dev.id); 
-  } else {
-    favoritos.push(dev); 
-  }
-
-  localStorage.setItem(chaveFavoritos, JSON.stringify(favoritos));
-
-  carregarDevs();
-}
-
-
->>>>>>> b0e6007e99807ca78d5374ee85526d155b6a2d9b
 function isFavorito(id) {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
   if (!usuario) return false;
